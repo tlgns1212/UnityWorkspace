@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
         Managers.Input.KeyAction += OnKeyboard;
         Managers.Input.MouseEventAction -= OnMouseClicked;
         Managers.Input.MouseEventAction += OnMouseClicked;
+
+        
+
+
     }
 
 
