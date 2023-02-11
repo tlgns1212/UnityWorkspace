@@ -15,6 +15,8 @@ public class GameScene : BaseScene
         //Managers.UI.ShowPopupUI<UI_Button>();
         Managers.UI.ShowSceneUI<UI_Inven>();
 
+        Dictionary<int,Stat> dict =  Managers.Data.StatDict;
+
         //for (int i = 0; i < 5; i++)
         //{
         //    Managers.Resource.Instantiate("UnityChan");
