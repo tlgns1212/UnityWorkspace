@@ -53,6 +53,10 @@ public class PoolManager
                 poolable = Create();
 
             poolable.gameObject.SetActive(true);
+
+            if(parent == null )
+                poolable.transform.parent = Managers.Scene.CurrentScene.transform;
+
             poolable.transform.parent = parent;
             poolable.IsUsing = true;
             return poolable;
@@ -66,10 +70,10 @@ public class PoolManager
 
     public void Init()
     {
-        if(_root = null)
+        if(_root == null)
         {
             _root = new GameObject { name = "@Pool_Root" }.transform;
-            Object.DestroyImmediate(_root);
+            Object.DontDestroyOnLoad(_root);
         }
     }
 
@@ -84,7 +88,14 @@ public class PoolManager
 
     public void Push(Poolable poolable)
     {
+        string name = poolable.gameObject.name;
+        if(_pool.ContainsKey(name) == false)
+        {
+            GameObject.Destroy(poolable.gameObject);
+            return;
+        }
 
+        _pool[name].Push(poolable);
     }
 
     public Poolable Pop(GameObject original, Transform parent = null)
@@ -103,5 +114,12 @@ public class PoolManager
         return _pool[name].Original;
     }
 
+    public void Clear()
+    {
+        foreach(Transform child in _root)
+            GameObject.Destroy(child.gameObject);
+
+        _pool.Clear();
+    }
 
 }
