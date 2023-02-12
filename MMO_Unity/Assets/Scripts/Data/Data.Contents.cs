@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+namespace Data
+{
 
 #region Stat
 
@@ -32,3 +34,5 @@ public class StatData : ILoader<int, Stat>
 }
 
 #endregion
+
+}
