@@ -13,11 +13,21 @@ public class GameScene : BaseScene
 
         //Managers.Resource.Instantiate("UI/UI_Button");
         //Managers.UI.ShowPopupUI<UI_Button>();
-        Managers.UI.ShowSceneUI<UI_Inven>();
+        //Managers.UI.ShowSceneUI<UI_Inven>();              // 인벤토리
 
         Dictionary<int, Data.Stat> dict =  Managers.Data.StatDict;
 
         gameObject.GetOrAddComponent<CursorController>();
+
+
+        GameObject player =  Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
+        Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
+
+        GameObject go = new GameObject { name = "SpawningPool" };
+        SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
+        pool.SetKeepMonsterCount(5);
+
+        
 
         //for (int i = 0; i < 5; i++)
         //{

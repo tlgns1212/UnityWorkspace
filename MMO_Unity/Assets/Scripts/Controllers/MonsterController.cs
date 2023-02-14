@@ -15,6 +15,7 @@ public class MonsterController : BaseController
 
     public override void Init()
     {
+        WorldObjectType = Define.WorldObject.Monster;
         _stat = GetComponent<Stat>();
 
         if(gameObject.GetComponentInChildren<UI_HPBar>() == null )
@@ -23,8 +24,7 @@ public class MonsterController : BaseController
 
     protected override void UpdateIdle()
     {
-        // TODO : 매너지가 생기면 옮기자
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = Managers.Game.GetPlayer();
         if (player == null)
             return;
 
@@ -36,6 +36,7 @@ public class MonsterController : BaseController
             return;
         }
     }
+
     protected override void UpdateMoving()
     {
         // 플레이어가 몬스터 사정거리보다 가까우면 공격
@@ -87,9 +88,7 @@ public class MonsterController : BaseController
         {
             // 체력
             Stat targetStat = _lockTarget.GetComponent<Stat>();
-            Stat myStat = gameObject.GetComponent<Stat>();
-            int damage = Mathf.Max(0, myStat.Attack - targetStat.Defense);
-            targetStat.Hp -= damage;
+            targetStat.OnAttacked(_stat);
 
             if(targetStat.Hp > 0)
             {
