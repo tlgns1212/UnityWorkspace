@@ -2,59 +2,29 @@
 
 namespace ServerCore
 {
-    class Lock
-    {
-        ManualResetEvent _available = new ManualResetEvent(true);
-
-        public void Acquire()
-        {
-            _available.WaitOne();
-            _available.Reset();
-        }
-        public void Release()
-        {
-            _available.Set();
-        }
-    }
-
     internal class Program
     {
-        static int _num = 0;
-        static Lock _lock = new Lock();
+        static ThreadLocal<string> ThreadName = new ThreadLocal<string>(() => { return $"My Name Is {Thread.CurrentThread.ManagedThreadId}"; });
 
-        static void T1()
+        static void WhoAmI()
         {
-            for(int i = 0; i < 100000; i++)
-            {
-                _lock.Acquire();
-                _num++;
-                _lock.Release();
-            }
-        }
-        static void T2()
-        {
-            for (int i = 0; i < 100000; i++)
-            {
-                _lock.Acquire();
-                _num--;
-                _lock.Release();
-            }
+            bool repeat = ThreadName.IsValueCreated;
+            if(repeat)
+                Console.WriteLine(ThreadName.Value + "(repeat)");
+            else
+                Console.WriteLine(ThreadName.Value);
+
         }
 
         static void Main(string[] args)
         {
             // 한것들 : Thread, ThreadPool, Task, TaskCreationOptions, Thread.MemoryBarrier(), Interlocked, Interlocked.Increment(ref num)
-            // (Monitor.Enter(obj), Monitor.Exit(obj)) -> lock(obj)으로 대체, 
+            // (Monitor.Enter(obj), Monitor.Exit(obj)) -> lock(obj)으로 대체, AutoResetEvent (자동문같은 형식),
+            // SpinLock, ReaderWriterLock, ThreadLocal<string>
 
-            Task t1 = new Task(T1);
-            Task t2 = new Task(T2);
+            Parallel.Invoke(WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI);
 
-            t1.Start();
-            t2.Start();
 
-            Task.WaitAll(t1, t2);
-
-            Console.WriteLine(_num);
         }
     }
 }
