@@ -1,6 +1,4 @@
-E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\net6.0\ServerCore.exe
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
-E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\net6.0\ServerCore.runtimeconfig.json
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
@@ -11,5 +9,4 @@ E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\ServerCor
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
-E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
 E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
