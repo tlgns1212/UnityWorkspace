@@ -1,0 +1,10 @@
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.deps.json
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.dll
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.pdb
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.csproj.AssemblyReference.cache
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfoInputs.cache
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfo.cs
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.csproj.CoreCompileInputs.cache
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.dll
+E:\UnityProjects\GameServerForUnity\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.pdb
