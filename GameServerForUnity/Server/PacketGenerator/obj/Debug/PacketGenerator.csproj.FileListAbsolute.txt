@@ -1,0 +1,15 @@
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\bin\Debug\PacketGenerator.exe
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\bin\Debug\PacketGenerator.deps.json
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\bin\Debug\PacketGenerator.runtimeconfig.json
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\bin\Debug\PacketGenerator.dll
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\bin\Debug\PacketGenerator.pdb
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.AssemblyReference.cache
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.GeneratedMSBuildEditorConfig.editorconfig
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfoInputs.cache
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfo.cs
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.CoreCompileInputs.cache
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.dll
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\refint\PacketGenerator.dll
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.pdb
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\PacketGenerator.genruntimeconfig.cache
+E:\UnityProjects\GameServerForUnity\Server\PacketGenerator\obj\Debug\ref\PacketGenerator.dll
