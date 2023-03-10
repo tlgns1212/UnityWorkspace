@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "p5wCZI5HcwkOsXvddVI1KGr3vllS1e62US4ORXaFL3xFqJSt1t+Et7nHO4FK25WSwa4gDvawrGT33OZz0pzhKA==",
+  "success": true,
+  "projectFilePath": "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\PacketGenerator\\PacketGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tlgns\\.nuget\\packages\\google.protobuf\\3.12.3\\google.protobuf.3.12.3.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\system.memory\\4.5.2\\system.memory.4.5.2.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.1\\system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
+  "logs": []
+}
