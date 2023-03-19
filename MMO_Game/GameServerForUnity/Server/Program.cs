@@ -9,23 +9,35 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Google.Protobuf.WellKnownTypes;
+using Server.Data;
 using Server.Game;
 using ServerCore;
 
 namespace Server
 {
-	class Program
+    class Program
 	{
 		static Listener _listener = new Listener();
+		static List<System.Timers.Timer> _timers = new List<System.Timers.Timer>();
 
-		static void FlushRoom()
+		static void TickRoom(GameRoom room, int tick = 100)
 		{
-			JobTimer.Instance.Push(FlushRoom, 250);
+			var timer = new System.Timers.Timer();
+			timer.Interval = tick;
+			timer.Elapsed += ((s, e) => { room.Update(); });
+			timer.AutoReset = true;
+			timer.Enabled = true;
+
+			_timers.Add(timer);
 		}
 
 		static void Main(string[] args)
 		{
-			RoomManager.Instance.Add();
+			ConfigManager.LoadConfig();
+			DataManager.LoadData();
+
+			GameRoom room = RoomManager.Instance.Add(1);
+			TickRoom(room, 50);
 
 			// DNS (Domain Name System)
 			string host = Dns.GetHostName();
@@ -37,11 +49,13 @@ namespace Server
 			Console.WriteLine("Listening...");
 
 			//FlushRoom();
-			JobTimer.Instance.Push(FlushRoom);
+			//JobTimer.Instance.Push(FlushRoom);
 
+			// TODO
 			while (true)
 			{
-				JobTimer.Instance.Flush();
+				//JobTimer.Instance.Flush();
+				Thread.Sleep(100);
 			}
 		}
 	}

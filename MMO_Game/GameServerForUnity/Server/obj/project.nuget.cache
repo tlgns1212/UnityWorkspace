@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RvKr2w5SAENjljM66DTL2UMD1HSm65NPhmGXtW4/yfgMDwYSOsru8SrwEmTO+4ycLCoSAhDYjF7PjHpVmQOlwQ==",
+  "dgSpecHash": "XFHOjlX/CRGushpZGcQhekjRG0NkY/yofKS+WKRFbfJNHuVUZyYk7Ty6gLnCtTJSsdhqExf0HvURr6Q0ZNIEZA==",
   "success": true,
   "projectFilePath": "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tlgns\\.nuget\\packages\\google.protobuf\\3.12.3\\google.protobuf.3.12.3.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\tlgns\\.nuget\\packages\\system.memory\\4.5.2\\system.memory.4.5.2.nupkg.sha512",
     "C:\\Users\\tlgns\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
   ],

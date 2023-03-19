@@ -49,3 +49,4 @@ E:\UnityProjects\MMO_Game\GameServerForUnity\Server\obj\Debug\netcoreapp3.1\Serv
 E:\UnityProjects\MMO_Game\GameServerForUnity\Server\obj\Debug\netcoreapp3.1\Server.dll
 E:\UnityProjects\MMO_Game\GameServerForUnity\Server\obj\Debug\netcoreapp3.1\Server.pdb
 E:\UnityProjects\MMO_Game\GameServerForUnity\Server\obj\Debug\netcoreapp3.1\Server.genruntimeconfig.cache
+E:\UnityProjects\MMO_Game\GameServerForUnity\Server\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

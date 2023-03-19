@@ -6,6 +6,7 @@ using static Define;
 
 public class MyPlayerController : PlayerController
 {
+    bool _moveKeyPressed = false;
 
     protected override void Init()
     {
@@ -35,24 +36,37 @@ public class MyPlayerController : PlayerController
     protected override void UpdateIdle()
     {
         // 이동 상태로 갈지 확인
-        if (Dir != MoveDir.None)
+        if (_moveKeyPressed)
         {
             State = CreatureState.Moving;
             return;
         }
 
         // 스킬 상태로 갈지 확인
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && _coSkillCooltime == null)
         {
-            State = CreatureState.Skill;
-            //_coSkill = StartCoroutine("CoStartPunch");
-            _coSkill = StartCoroutine("CoStartShootArrow");
+            Debug.Log("Skill!");
+
+            C_Skill skill = new C_Skill() { Info = new SkillInfo() };
+            skill.Info.SkillId = 2;
+            Managers.Network.Send(skill);
+
+            _coSkillCooltime = StartCoroutine("CoInputCooltime", 0.2f);
         }
+    }
+
+    Coroutine _coSkillCooltime;
+    IEnumerator CoInputCooltime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _coSkillCooltime = null;
     }
 
     // 키보드 입력
     void GetDirInput()
     {
+        _moveKeyPressed = true;
+
         if (Input.GetKey(KeyCode.W))
         {
             Dir = MoveDir.Up;
@@ -71,23 +85,57 @@ public class MyPlayerController : PlayerController
         }
         else
         {
-            Dir = MoveDir.None;
+            _moveKeyPressed = false;
         }
     }
 
     protected override void MoveToNextPos()
     {
-        CreatureState prevState = State;
-        Vector3Int prevCellPos = CellPos;
+        if (_moveKeyPressed == false)
+        {
+            State = CreatureState.Idle;
+            CheckUpdatedFlag();
+            return;
+        }
 
-        base.MoveToNextPos();
+        Vector3Int destPos = CellPos;
+        switch (Dir)
+        {
+            case MoveDir.Up:
+                destPos += Vector3Int.up;
+                break;
+            case MoveDir.Down:
+                destPos += Vector3Int.down;
+                break;
+            case MoveDir.Left:
+                destPos += Vector3Int.left;
+                break;
+            case MoveDir.Right:
+                destPos += Vector3Int.right;
+                break;
+            default:
+                break;
+        }
 
-        if(prevState != State || CellPos != prevCellPos)
+        if (Managers.Map.CanGo(destPos))
+        {
+            if (Managers.Object.FindCreature(destPos) == null)
+            {
+                CellPos = destPos;
+            }
+        }
+
+        CheckUpdatedFlag();
+    }
+
+    protected override void CheckUpdatedFlag()
+    {
+        if (_updated)
         {
             C_Move movePacket = new C_Move();
             movePacket.PosInfo = PosInfo;
             Managers.Network.Send(movePacket);
+            _updated = false;
         }
-
     }
 }

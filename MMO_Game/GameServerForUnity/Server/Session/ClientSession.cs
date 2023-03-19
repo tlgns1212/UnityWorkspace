@@ -9,10 +9,11 @@ using System.Net;
 using Google.Protobuf.Protocol;
 using Google.Protobuf;
 using Server.Game;
+using Server.Data;
 
 namespace Server
 {
-	public class ClientSession : PacketSession
+    public class ClientSession : PacketSession
 	{
 		public Player MyPlayer { get; set; }
 		public int SessionId { get; set; }
@@ -36,17 +37,22 @@ namespace Server
 		{
 			Console.WriteLine($"OnConnected : {endPoint}");
 
-			MyPlayer = PlayerManager.Instance.Add();
+			MyPlayer = ObjectManager.Instance.Add<Player>();
 			{
-				MyPlayer.Info.Name = $"Player_{MyPlayer.Info.PlayerId}";
+				MyPlayer.Info.Name = $"Player_{MyPlayer.Info.ObjectId}";
 				MyPlayer.Info.PosInfo.State = CreatureState.Idle;
-				MyPlayer.Info.PosInfo.MoveDir = MoveDir.None;
+				MyPlayer.Info.PosInfo.MoveDir = MoveDir.Down;
 				MyPlayer.Info.PosInfo.PosX = 0;
 				MyPlayer.Info.PosInfo.PosY = 0;
 
+				StatInfo stat = null;
+				DataManager.StatDict.TryGetValue(1, out stat);
+				MyPlayer.Stat.MergeFrom(stat);
+
 				MyPlayer.Session = this;
             }
-			RoomManager.Instance.Find(1).EnterGame(MyPlayer);
+			GameRoom room = RoomManager.Instance.Find(1);
+			room.Push(room.EnterGame, MyPlayer);
         }
 
 		public override void OnRecvPacket(ArraySegment<byte> buffer)
@@ -56,7 +62,8 @@ namespace Server
 
 		public override void OnDisconnected(EndPoint endPoint)
 		{
-            RoomManager.Instance.Find(1).LeaveGame(MyPlayer.Info.PlayerId);
+			GameRoom room = RoomManager.Instance.Find(1);
+			room.Push(room.LeaveGame, MyPlayer.Info.ObjectId);
             SessionManager.Instance.Remove(this);
 
 			Console.WriteLine($"OnDisconnected : {endPoint}");
