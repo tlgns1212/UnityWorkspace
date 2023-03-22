@@ -10,6 +10,7 @@ using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Google.Protobuf.WellKnownTypes;
 using Server.Data;
+using Server.DB;
 using Server.Game;
 using ServerCore;
 
@@ -36,6 +37,7 @@ namespace Server
 			ConfigManager.LoadConfig();
 			DataManager.LoadData();
 
+
 			GameRoom room = RoomManager.Instance.Add(1);
 			TickRoom(room, 50);
 
@@ -54,8 +56,7 @@ namespace Server
 			// TODO
 			while (true)
 			{
-				//JobTimer.Instance.Flush();
-				Thread.Sleep(100);
+				DbTransaction.Instance.Flush();
 			}
 		}
 	}
