@@ -7,7 +7,7 @@ public class UIManager
     int _order = 10;
 
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
-    UI_Scene _sceneUI = null;
+    public UI_Scene SceneUI { get; private set; }
 
     public GameObject Root
     {
@@ -36,6 +36,22 @@ public class UIManager
         }
     }
 
+    public T MakeWorldSpaceUI<T>(Transform parent = null, string name = null) where T : UI_Base
+    {
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
+
+        GameObject go = Managers.Resource.Instantiate($"UI/WorldSpace/{name}");
+        if (parent != null)
+            go.transform.SetParent(parent);
+
+        Canvas canvas = go.GetOrAddComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace;
+        canvas.worldCamera = Camera.main;
+
+        return Util.GetOrAddComponent<T>(go);
+    }
+
     public T MakeSubItem<T>(Transform parent = null,string name = null) where T : UI_Base
     {
         if(string.IsNullOrEmpty(name))
@@ -57,7 +73,7 @@ public class UIManager
 
         GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
         T sceneUI = Util.GetOrAddComponent<T>(go);
-        _sceneUI = sceneUI;
+        SceneUI = sceneUI;
 
         go.transform.SetParent(Root.transform);
         return sceneUI;
@@ -112,6 +128,6 @@ public class UIManager
     public void Clear()
     {
         CloseAllPopupUI();
-        _sceneUI = null;
+        SceneUI = null;
     }
 }

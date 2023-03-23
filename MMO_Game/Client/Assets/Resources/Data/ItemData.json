@@ -4,19 +4,68 @@
       "id": "1",
       "name": "견습생의 검",
       "weaponType": "Sword",
-      "damage": "10"
+      "damage": "10",
+      "iconPath": "Textures/Item/sword"
     },
     {
       "id": "2",
       "name": "견습생의 활",
       "weaponType": "Bow",
-      "damage": "5"
+      "damage": "5",
+      "iconPath": "Textures/Item/bow"
     },
     {
       "id": "3",
       "name": "숙련자의 검",
       "weaponType": "Sword",
-      "damage": "20"
+      "damage": "20",
+      "iconPath": "Textures/Item/axe"
+    }
+  ],
+  "armors": [
+    {
+      "id": "101",
+      "name": "견습생의 갑옷",
+      "armorType": "Armor",
+      "defence": "10",
+      "iconPath": "Textures/Item/armor"
+    },
+    {
+      "id": "102",
+      "name": "견습생의 투구",
+      "armorType": "Helmet",
+      "defence": "5",
+      "iconPath": "Textures/Item/helmets"
+    },
+    {
+      "id": "103",
+      "name": "견습생의 신발",
+      "armorType": "Boots",
+      "defence": "20",
+      "iconPath": "Textures/Item/boots"
+    }
+  ],
+  "consumables": [
+    {
+      "id": "201",
+      "name": "견습생의 HP 물약",
+      "consumableType": "Potion",
+      "maxCount": "10",
+      "iconPath": "Textures/Item/hp"
+    },
+    {
+      "id": "202",
+      "name": "견습생의 MP 물약",
+      "consumableType": "Potion",
+      "maxCount": "5",
+      "iconPath": "Textures/Item/mp"
+    },
+    {
+      "id": "203",
+      "name": "사과",
+      "consumableType": "Potion",
+      "maxCount": "20",
+      "iconPath": "Textures/Item/apple"
     }
   ]
 }
