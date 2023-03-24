@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "vU+fWwo+HYaYWul3ibCsTsrT9liR1Bb0R54Tqv6hRkS3zQBucpU7L+KYME4/bX03YA5g2sK2BSdRY5h942rpcw==",
+  "success": true,
+  "projectFilePath": "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\DummyClient\\DummyClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tlgns\\.nuget\\packages\\google.protobuf\\3.12.3\\google.protobuf.3.12.3.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\system.memory\\4.5.2\\system.memory.4.5.2.nupkg.sha512",
+    "C:\\Users\\tlgns\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
+  "logs": []
+}

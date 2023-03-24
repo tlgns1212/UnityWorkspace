@@ -64,11 +64,7 @@ namespace Server.Game
                 return;
             _nextSearchTick = Environment.TickCount64 + 1000;
 
-            Player target = Room.FindPlayer(p =>
-            {
-                Vector2Int dir = p.CellPos - CellPos;
-                return dir.cellDistFromZero < _searchCellDist;
-            });
+            Player target = Room.FindClosestPlayer(CellPos, _searchCellDist);
             if (target == null)
                 return;
 
@@ -103,7 +99,7 @@ namespace Server.Game
                 return;
             }
 
-            List<Vector2Int> path = Room.Map.FindPath(CellPos, _target.CellPos, checkObjects: false);
+            List<Vector2Int> path = Room.Map.FindPath(CellPos, _target.CellPos, checkObjects: true);
             if(path.Count < 2 || path.Count > _chaseCellDist)
             {
                 _target = null;
@@ -132,7 +128,7 @@ namespace Server.Game
             S_Move movePacket = new S_Move();
             movePacket.ObjectId = Id;
             movePacket.PosInfo = PosInfo;
-            Room.Broadcast(movePacket);
+            Room.Broadcast(CellPos, movePacket);
         }
 
         long _coolTick = 0;
@@ -178,7 +174,7 @@ namespace Server.Game
                 S_Skill skill = new S_Skill() { Info = new SkillInfo() };
                 skill.ObjectId = Id;
                 skill.Info.SkillId = skillData.id;
-                Room.Broadcast(skill);
+                Room.Broadcast(CellPos, skill);
 
                 // 스킬 쿨타임 적용
                 int coolTick = (int)(1000 * skillData.cooldown);
