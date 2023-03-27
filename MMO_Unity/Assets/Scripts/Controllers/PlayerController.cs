@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,16 +10,27 @@ public class PlayerController : BaseController
     int _mask = (1 << (int)Define.Layer.Ground) | (1 << (int)Define.Layer.Monster);
     
     PlayerStat _stat;
-    bool _stopSkill = false;
+    protected bool _stopSkill = false;
+    [SerializeField]
+    protected Camera _mainCamera;
+    [SerializeField]
+    protected float turnSmoothing = 0.06f;
 
+    private Rigidbody RBody { get; set; }
+    private Vector3 _lastDirection;
+    private float horizontalInput;
+    private float verticalInput;
+
+    public void SetCamera(Camera camera) { _mainCamera = camera; }
 
     public override void Init()
     {
-        WorldObjectType = Define.WorldObject.Player;
         _stat = GetComponent<PlayerStat>();
+        RBody = GetComponent<Rigidbody>();
+        WorldObjectType = Define.WorldObject.Player;
 
-        //Managers.Input.KeyAction -= OnKeyboard;
-        //Managers.Input.KeyAction += OnKeyboard;
+        Managers.Input.KeyAction -= OnKeyboard;
+        Managers.Input.KeyAction += OnKeyboard;
         Managers.Input.MouseAction -= OnMouseEvent;
         Managers.Input.MouseAction += OnMouseEvent;
 
@@ -98,41 +110,77 @@ public class PlayerController : BaseController
         
     }
 
-    //void OnKeyboard()
-    //{
+    void OnKeyboard(Define.ArrowKeyEvent evt)
+    {
+        switch (State)
+        {
+            case Define.State.Idle:
+                OnArrowKeyEvent_IdleRun(evt);
+                break;
+            case Define.State.Moving:
+                OnArrowKeyEvent_IdleRun(evt);
+                break;
+            case Define.State.Skill:
+                {
+                    if (evt == Define.ArrowKeyEvent.PressUp)
+                        _stopSkill = true;
+                }
+                break;
+        }
+    }
 
-    //    if (Input.GetKey(KeyCode.W))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
-    //        transform.Translate(Vector3.forward * Time.deltaTime * _stat.MoveSpeed);
-    //        //transform.position += Vector3.forward * Time.deltaTime * _stat.MoveSpeed;
-    //    }
+    // Rotate the player to match correct orientation, according to camera and key pressed.
+    Vector3 Rotating()
+    {
+        // Get camera forward direction, without vertical component.
+        Vector3 forward = _mainCamera.transform.TransformDirection(Vector3.forward);
 
-    //    if (Input.GetKey(KeyCode.S))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.2f);
-    //        transform.Translate(Vector3.forward * Time.deltaTime * _stat.MoveSpeed);
-    //        //transform.position += Vector3.forward * Time.deltaTime * _stat.MoveSpeed;
-    //    }
+        // Player is moving on ground, Y component of camera facing is not relevant.
+        forward.y = 0.0f;
+        forward = forward.normalized;
 
-    //    if (Input.GetKey(KeyCode.A))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.2f);
-    //        transform.Translate(Vector3.forward * Time.deltaTime * _stat.MoveSpeed);
-    //        //transform.position += Vector3.forward * Time.deltaTime * _stat.MoveSpeed;
-    //    }
-    //    if (Input.GetKey(KeyCode.D))
-    //    {
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.2f);
-    //        transform.Translate(Vector3.forward * Time.deltaTime * _stat.MoveSpeed);
-    //        //transform.position += Vector3.forward * Time.deltaTime * _stat.MoveSpeed;
+        // Calculate target direction based on camera forward and direction key.
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 targetDirection;
+        targetDirection = forward * verticalInput + right * horizontalInput;
 
-    //    }
-    //    _state = Define.State.Idle;
-    //}
+        // Lerp current direction to calculated target direction.
+        if ((IsMoving() && targetDirection != Vector3.zero))
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+            Quaternion newRotation = Quaternion.Slerp(RBody.rotation, targetRotation, turnSmoothing);
+            RBody.MoveRotation(newRotation);
+            _lastDirection = targetDirection;
+        }
+        // If idle, Ignore current camera facing and consider last moving direction.
+        if (!(Mathf.Abs(horizontalInput) > 0.9 || Mathf.Abs(verticalInput) > 0.9))
+        {
+            Repositioning();
+        }
+
+        return targetDirection;
+    }
 
 
-    
+    // Check if the player is moving.
+    public bool IsMoving()
+    {
+        return (horizontalInput != 0) || (verticalInput != 0);
+    }
+
+    public void Repositioning()
+    {
+        if (_lastDirection != Vector3.zero)
+        {
+            _lastDirection.y = 0;
+            Quaternion targetRotation = Quaternion.LookRotation(_lastDirection);
+            Quaternion newRotation = Quaternion.Slerp(RBody.rotation, targetRotation, turnSmoothing);
+            RBody.MoveRotation(newRotation);
+        }
+    }
+
+
     void OnMouseEvent(Define.MouseEvent evt)
     {
         switch (State)
@@ -151,6 +199,55 @@ public class PlayerController : BaseController
                 break;
         }
     }
+
+    void OnArrowKeyEvent_IdleRun(Define.ArrowKeyEvent evt)
+    {
+        //RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //bool raycastHit = Physics.Raycast(ray, out hit, 100.0f, _mask);
+        //Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
+
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+        movementDirection.Normalize();
+        
+        //Rotating();
+        ////transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward + new Vector3(0.1f, 0, 0)), 0.2f);
+        //transform.Translate(_lastDirection * _stat.MoveSpeed * Time.deltaTime, Space.Self);
+
+
+        switch (evt)
+        {
+            case Define.ArrowKeyEvent.PressDown:
+                {
+                    State = Define.State.Moving;
+                    _destPos = Rotating(); 
+                    //transform.Translate(transform.TransformDirection(transform.forward) * _stat.MoveSpeed * Time.deltaTime, Space.Self);
+                    _destPos += transform.position + transform.forward * 0.1f;
+                    //transform.Translate(_lastDirection * _stat.MoveSpeed * Time.deltaTime, Space.Self);
+                    _stopSkill = false;
+                }
+                break;
+            case Define.ArrowKeyEvent.Press:
+                {
+                    _destPos = Rotating();
+                    //transform.Translate(transform.TransformDirection(transform.forward) * _stat.MoveSpeed * Time.deltaTime, Space.Self);
+                    _destPos += transform.position + transform.forward * 0.1f;
+                    //transform.Translate(_lastDirection * _stat.MoveSpeed * Time.deltaTime, Space.Self);
+                }
+                break;
+            case Define.ArrowKeyEvent.PressUp:
+                {
+                    _stopSkill = true;
+                    _destPos = transform.position;
+                    State = Define.State.Idle;
+                }
+                break;
+        }
+    }
+
 
     void OnMouseEvent_IdleRun(Define.MouseEvent evt)
     {

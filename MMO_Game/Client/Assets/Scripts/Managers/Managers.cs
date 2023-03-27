@@ -6,18 +6,20 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     static Managers s_instance;   // 싱글톤 패턴, 유일성 보장
-    static Managers Instance { get { Init();  return s_instance; } }   // 유일한 매니저를 갖고 온다.
+    public static Managers Instance { get { Init();  return s_instance; } }   // 유일한 매니저를 갖고 온다.
 
     #region Contents
     InventoryManager _inven = new InventoryManager();
     MapManager _map = new MapManager();
     ObjectManager _obj = new ObjectManager();
     NetworkManager _network = new NetworkManager();
+    WebManager _web = new WebManager();
 
     public static InventoryManager Inven { get { return Instance._inven; } }
     public static MapManager Map { get { return Instance._map; } }
     public static ObjectManager Object {  get { return Instance._obj; } }
     public static NetworkManager Network { get {  return Instance._network; } }
+    public static WebManager Web { get { return Instance._web; } }
     #endregion
 
     #region Core
@@ -63,7 +65,6 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
 
-            s_instance._network.Init();
             s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();

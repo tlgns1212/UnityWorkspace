@@ -1692,6 +1692,19 @@
         "runtime": {
           "bin/placeholder/ServerCore.dll": {}
         }
+      },
+      "SharedDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7"
+        },
+        "compile": {
+          "bin/placeholder/SharedDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharedDB.dll": {}
+        }
       }
     }
   },
@@ -5723,6 +5736,11 @@
       "type": "project",
       "path": "../ServerCore/ServerCore.csproj",
       "msbuildProject": "../ServerCore/ServerCore.csproj"
+    },
+    "SharedDB/1.0.0": {
+      "type": "project",
+      "path": "../SharedDB/SharedDB.csproj",
+      "msbuildProject": "../SharedDB/SharedDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5732,7 +5750,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.7",
       "Microsoft.Extensions.Logging.Console >= 3.1.7",
       "Newtonsoft.Json >= 13.0.3",
-      "ServerCore >= 1.0.0"
+      "ServerCore >= 1.0.0",
+      "SharedDB >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5769,6 +5788,9 @@
           "projectReferences": {
             "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\ServerCore\\ServerCore.csproj": {
               "projectPath": "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\ServerCore\\ServerCore.csproj"
+            },
+            "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\SharedDB\\SharedDB.csproj": {
+              "projectPath": "E:\\UnityProjects\\MMO_Game\\GameServerForUnity\\SharedDB\\SharedDB.csproj"
             }
           }
         }

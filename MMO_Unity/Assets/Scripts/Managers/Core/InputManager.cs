@@ -6,11 +6,13 @@ using UnityEngine.EventSystems;
 
 public class InputManager
 {
-    public Action KeyAction = null;
+    public Action<Define.ArrowKeyEvent> KeyAction = null;
     public Action<Define.MouseEvent> MouseAction = null;
 
-    bool _pressed = false;
-    float _pressedTime = 0;
+    bool _pressedMouse = false;
+    bool _pressedKey = false;
+    float _pressedMouseTime = 0;
+    float _pressedKeyTime = 0;
 
     public void OnUpdate()
     {
@@ -19,31 +21,52 @@ public class InputManager
             return;
 
 
-        if (Input.anyKey && KeyAction != null)
-            KeyAction.Invoke();
-
-        if(MouseAction != null)
+        if (KeyAction != null)
+        {
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))
+            {
+                if (!_pressedKey)
+                {
+                    KeyAction.Invoke(Define.ArrowKeyEvent.PressDown);
+                    _pressedKeyTime = Time.time;
+                }
+                KeyAction.Invoke(Define.ArrowKeyEvent.Press);
+                _pressedKey = true;
+            }
+            if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.D))
+            {
+                if (_pressedKey)
+                {
+                    if (Time.time < _pressedKeyTime + 0.2f)
+                        KeyAction.Invoke(Define.ArrowKeyEvent.Click);
+                    KeyAction.Invoke(Define.ArrowKeyEvent.PressUp);
+                }
+                _pressedKey = false;
+                _pressedKeyTime = 0;
+            }
+        }
+        if (MouseAction != null)
         {
             if (Input.GetMouseButton(0))
             {
-                if(!_pressed)
+                if (!_pressedMouse)
                 {
                     MouseAction.Invoke(Define.MouseEvent.PointerDown);
-                    _pressedTime = Time.time;
+                    _pressedMouseTime = Time.time;
                 }
                 MouseAction.Invoke(Define.MouseEvent.Press);
-                _pressed = true;
+                _pressedMouse = true;
             }
-            else
+            if(Input.GetMouseButtonUp(0))
             {
-                if(_pressed)
+                if (_pressedMouse)
                 {
-                    if(Time.time < _pressedTime + 0.2f)
+                    if (Time.time < _pressedMouseTime + 0.2f)
                         MouseAction.Invoke(Define.MouseEvent.Click);
                     MouseAction.Invoke(Define.MouseEvent.PointerUp);
                 }
-                _pressed = false;
-                _pressedTime = 0;
+                _pressedMouse = false;
+                _pressedMouseTime = 0;
             }
         }
     }

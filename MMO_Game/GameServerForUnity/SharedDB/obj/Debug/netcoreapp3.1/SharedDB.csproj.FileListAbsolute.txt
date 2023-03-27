@@ -1,0 +1,13 @@
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.deps.json
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.runtimeconfig.json
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.runtimeconfig.dev.json
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.dll
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.pdb
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.csproj.AssemblyReference.cache
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.GeneratedMSBuildEditorConfig.editorconfig
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.AssemblyInfoInputs.cache
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.AssemblyInfo.cs
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.csproj.CoreCompileInputs.cache
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.dll
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.pdb
+E:\UnityProjects\MMO_Game\GameServerForUnity\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.genruntimeconfig.cache

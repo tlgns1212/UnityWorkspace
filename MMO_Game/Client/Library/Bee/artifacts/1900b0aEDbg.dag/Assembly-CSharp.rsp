@@ -366,6 +366,7 @@
 "Assets/Scripts/Managers/Contents/MapManager.cs"
 "Assets/Scripts/Managers/Contents/NetworkManager.cs"
 "Assets/Scripts/Managers/Contents/ObjectManager.cs"
+"Assets/Scripts/Managers/Contents/WebManager.cs"
 "Assets/Scripts/Managers/Core/DataManager.cs"
 "Assets/Scripts/Managers/Core/Poolable.cs"
 "Assets/Scripts/Managers/Core/PoolManager.cs"
@@ -382,13 +383,17 @@
 "Assets/Scripts/Packet/ServerSession.cs"
 "Assets/Scripts/Scenes/BaseScene.cs"
 "Assets/Scripts/Scenes/GameScene.cs"
+"Assets/Scripts/Scenes/LoginScene.cs"
 "Assets/Scripts/ServerCore/Connector.cs"
 "Assets/Scripts/ServerCore/RecvBuffer.cs"
 "Assets/Scripts/ServerCore/Session.cs"
 "Assets/Scripts/UI/Popup/UI_Popup.cs"
+"Assets/Scripts/UI/Popup/UI_SelectServerPopup.cs"
+"Assets/Scripts/UI/Popup/UI_SelectServerPopup_Item.cs"
 "Assets/Scripts/UI/Scene/UI_GameScene.cs"
 "Assets/Scripts/UI/Scene/UI_Inventory.cs"
 "Assets/Scripts/UI/Scene/UI_Inventory_Item.cs"
+"Assets/Scripts/UI/Scene/UI_LoginScene.cs"
 "Assets/Scripts/UI/Scene/UI_Scene.cs"
 "Assets/Scripts/UI/Scene/UI_Stat.cs"
 "Assets/Scripts/UI/UI_Base.cs"
@@ -397,6 +402,7 @@
 "Assets/Scripts/Utils/Extension.cs"
 "Assets/Scripts/Utils/PriorityQueue.cs"
 "Assets/Scripts/Utils/Util.cs"
+"Assets/Scripts/Web/WebPacket.cs"
 -langversion:9.0
 
 /deterministic

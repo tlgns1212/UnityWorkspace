@@ -55,6 +55,15 @@ public enum Layer
         PointerUp,
         Click,
     }
+
+    public enum ArrowKeyEvent
+    {
+        PressDown,
+        Press,
+        PressUp,
+        Click
+    }
+
     public enum CameraMode
     {
         QuaterView,

@@ -20,14 +20,17 @@ public class GameScene : BaseScene
         gameObject.GetOrAddComponent<CursorController>();
 
 
-        GameObject player =  Managers.Game.Spawn(Define.WorldObject.Player, "UnityChan");
+        GameObject player =  Managers.Game.Spawn(Define.WorldObject.Player, "Creature/UnityChan");
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
+        player.GetOrAddComponent<PlayerController>().SetCamera(Camera.main);
 
         GameObject go = new GameObject { name = "SpawningPool" };
-        SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
-        pool.SetKeepMonsterCount(5);
 
-        
+        // 몬스터 소환
+        //SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
+        //pool.SetKeepMonsterCount(5);
+
+
 
         //for (int i = 0; i < 5; i++)
         //{
